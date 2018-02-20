@@ -23,7 +23,7 @@ namespace garbageBagLabelGenerator
 
         void startup()
         {
-            this.Text += " wersja 1.00";
+            this.Text += " wersja 1.01";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             settings = new Settings(settingsPath);

@@ -33,7 +33,7 @@ namespace garbageBagLabelGenerator
             g.PageUnit = GraphicsUnit.Millimeter;
             float lineSize = 0.2f;
             Pen p = new Pen(Color.Black, lineSize);
-            Pen labelBorder = new Pen(Color.White,0);
+            Pen labelBorder = new Pen(Color.White, 0);
 
             //page settings
             int pageWidth = 210;
@@ -71,11 +71,13 @@ namespace garbageBagLabelGenerator
             int currentColumn = 0;
             int currentRow = 0;
 
-            string CompanyNameCd = "";
+            string CompanyNameL0 = "";
+            string CompanyNameL1 = "";
+
             if (CompanyName.Length > 30)
             {
-                CompanyNameCd = CompanyName.Substring(21, CompanyName.Length - 21);
-                CompanyName = CompanyName.Substring(0, 22);
+                CompanyNameL0 = CompanyName.Substring(0, 22);
+                CompanyNameL1 = CompanyName.Substring(21, CompanyName.Length - 21);
             }
 
             while (currentRow < rows)
@@ -93,8 +95,8 @@ namespace garbageBagLabelGenerator
                     Point ptCloseDate = new Point(labelCenter, labelLocation.Y + 22);
 
                     g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(CompanyName, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(CompanyNameCd, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                    g.DrawString(CompanyNameL0, fontSmall, brush, ptCompanyName, stringFormat);
+                    g.DrawString(CompanyNameL1, fontSmall, brush, ptCompanyNameCd, stringFormat);
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
@@ -108,11 +110,11 @@ namespace garbageBagLabelGenerator
                     Point ptRegistrationBook = new Point(labelCenter, labelLocation.Y + 17);
                     Point ptRegistrationAuthority = new Point(labelCenter, labelLocation.Y + 19);
                     Point ptOpenDate = new Point(labelLocation.X + 13, labelLocation.Y + 22);
-                    Point ptCloseDate = new Point(labelLocation.X+labelWidth-13, labelLocation.Y + 22);
+                    Point ptCloseDate = new Point(labelLocation.X + labelWidth - 13, labelLocation.Y + 22);
 
                     g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(CompanyName, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(CompanyNameCd, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                    g.DrawString(CompanyNameL0, fontSmall, brush, ptCompanyName, stringFormat);
+                    g.DrawString(CompanyNameL1, fontSmall, brush, ptCompanyNameCd, stringFormat);
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
                     g.DrawString("REGON 301778672", fontSmall, brush, ptRegon, stringFormat);
                     g.DrawString("Nr Ks. Rej. 000000026100", fontSmall, brush, ptRegistrationBook, stringFormat);
