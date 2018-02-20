@@ -11,34 +11,34 @@ namespace garbageBagLabelGenerator
     {
         public Company Company { get; set; }
         public List<string> Units { get; set; }
-        public List<string> GarabageTypes { get; set; }
         public string Path { get; set; }
 
         public Settings(string path)
         {
             Path = path;
             Units = new List<string>();
-            GarabageTypes = new List<string>();
-            importFromXML(path);
         }
 
-        void importFromXML(string path)
+        public bool importFromXML()
         {
-                XDocument doc = XDocument.Load(path);
+            try
+            {
+                XDocument doc = XDocument.Load(Path);
                 XElement elemCompany = doc.Element("Settings").Element("Company");
-                XElement elemGarbageTypes = doc.Element("Settings").Element("Company").Element("GarbageTypes");
                 XElement elemUnits = doc.Element("Settings").Element("Company").Element("Units");
                 Company = Company.get(elemCompany);
-
-                foreach (XElement elem in elemGarbageTypes.Elements("GarbageType"))
-                {
-                    GarabageTypes.Add(elem.Value);
-                }
 
                 foreach (XElement elem in elemUnits.Elements("Unit"))
                 {
                     Units.Add(elem.Value);
                 }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

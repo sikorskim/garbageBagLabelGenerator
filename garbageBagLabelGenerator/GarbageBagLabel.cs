@@ -10,17 +10,15 @@ namespace garbageBagLabelGenerator
     public class GarbageBagLabel
     {
         public string GarbageType { get; set; }
-        public string CompanyName { get; set; }
+        public Company Company { get; set; }
         public string UnitName { get; set; }
 
-        public GarbageBagLabel(string garbageType, string companyName, string unitName)
+        public GarbageBagLabel(string garbageType, Company company, string unitName)
         {
             GarbageType = garbageType;
-            CompanyName = companyName;
+            Company = company;
             UnitName = unitName;
         }
-
-
 
         public void print(System.Drawing.Printing.PrintPageEventArgs e, int labelCode)
         {
@@ -38,8 +36,8 @@ namespace garbageBagLabelGenerator
             //page settings
             int pageWidth = 210;
             int pageHeight = 297;
-            int marginTop = 4;
-            int marginLeft = 4;
+            //int marginTop = 4;
+            //int marginLeft = 4;
 
             //font settings
             Font fontDefault = new Font("Times New Roman", 8);
@@ -52,8 +50,6 @@ namespace garbageBagLabelGenerator
             //label settings
             int labelWidth = 52;
             int labelHeight = 29;
-            //labelWidth = labelWidth - marginLeft;
-            //labelHeight = labelHeight - marginTop;
 
             Size labelSize = new Size(labelWidth, labelHeight);
 
@@ -71,15 +67,6 @@ namespace garbageBagLabelGenerator
             int currentColumn = 0;
             int currentRow = 0;
 
-            string CompanyNameL0 = "";
-            string CompanyNameL1 = "";
-
-            if (CompanyName.Length > 30)
-            {
-                CompanyNameL0 = CompanyName.Substring(0, 22);
-                CompanyNameL1 = CompanyName.Substring(21, CompanyName.Length - 21);
-            }
-
             while (currentRow < rows)
             {
                 Point labelLocation = new Point(labelWidth * currentColumn, labelHeight * currentRow);
@@ -95,8 +82,8 @@ namespace garbageBagLabelGenerator
                     Point ptCloseDate = new Point(labelCenter, labelLocation.Y + 22);
 
                     g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(CompanyNameL0, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(CompanyNameL1, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                    g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
+                    g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
@@ -113,12 +100,12 @@ namespace garbageBagLabelGenerator
                     Point ptCloseDate = new Point(labelLocation.X + labelWidth - 13, labelLocation.Y + 22);
 
                     g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(CompanyNameL0, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(CompanyNameL1, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                    g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
+                    g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
-                    g.DrawString("REGON 301778672", fontSmall, brush, ptRegon, stringFormat);
-                    g.DrawString("Nr Ks. Rej. 000000026100", fontSmall, brush, ptRegistrationBook, stringFormat);
-                    g.DrawString("Oragan rejestrowy Wojewoda Wielkopolski", fontSmall, brush, ptRegistrationAuthority, stringFormat);
+                    g.DrawString("REGON " + Company.REGON, fontSmall, brush, ptRegon, stringFormat);
+                    g.DrawString("Nr Ks. Rej. " + Company.RegistrationBookNumber, fontSmall, brush, ptRegistrationBook, stringFormat);
+                    g.DrawString("Oragan rejestrowy " + Company.RegistrationAuthority, fontSmall, brush, ptRegistrationAuthority, stringFormat);
                     g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
