@@ -23,10 +23,10 @@ namespace garbageBagLabelGenerator
         public void print(System.Drawing.Printing.PrintPageEventArgs e, int labelCode)
         {
             Graphics g = e.Graphics;
-            drawTemplate(g, labelCode);
+            draw(g, labelCode);
         }
 
-        void drawTemplate(Graphics g, int code)
+        void draw(Graphics g, int code)
         {
             g.PageUnit = GraphicsUnit.Millimeter;
             float lineSize = 0.2f;
@@ -61,8 +61,6 @@ namespace garbageBagLabelGenerator
             g.FillRectangle(Brushes.White, page);
 
             //draw label
-            int columns = 4;
-            int rows = 10;
             int labelsOnPage = columns * rows;
             int currentColumn = 0;
             int currentRow = 0;
@@ -75,39 +73,11 @@ namespace garbageBagLabelGenerator
 
                 if (code == 0)
                 {
-                    Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
-                    Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
-                    Point ptCompanyNameCd = new Point(labelCenter, labelLocation.Y + 10);
-                    Point ptUnitName = new Point(labelCenter, labelLocation.Y + 14);
-                    Point ptCloseDate = new Point(labelCenter, labelLocation.Y + 22);
-
-                    g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
-                    g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
-                    g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
+                    municipalLabel(g);
                 }
                 else if (code == 1)
                 {
-                    Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
-                    Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
-                    Point ptCompanyNameCd = new Point(labelCenter, labelLocation.Y + 9);
-                    Point ptUnitName = new Point(labelCenter, labelLocation.Y + 11);
-                    Point ptRegon = new Point(labelCenter, labelLocation.Y + 15);
-                    Point ptRegistrationBook = new Point(labelCenter, labelLocation.Y + 17);
-                    Point ptRegistrationAuthority = new Point(labelCenter, labelLocation.Y + 19);
-                    Point ptOpenDate = new Point(labelLocation.X + 13, labelLocation.Y + 22);
-                    Point ptCloseDate = new Point(labelLocation.X + labelWidth - 13, labelLocation.Y + 22);
-
-                    g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
-                    g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
-                    g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
-                    g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
-                    g.DrawString("REGON " + Company.REGON, fontSmall, brush, ptRegon, stringFormat);
-                    g.DrawString("Nr Ks. Rej. " + Company.RegistrationBookNumber, fontSmall, brush, ptRegistrationBook, stringFormat);
-                    g.DrawString("Oragan rejestrowy " + Company.RegistrationAuthority, fontSmall, brush, ptRegistrationAuthority, stringFormat);
-                    g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
-                    g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
+                    infectiousLabel(g);
                 }
 
                 g.DrawRectangle(labelBorder, label);
@@ -117,6 +87,44 @@ namespace garbageBagLabelGenerator
                     currentColumn = 0;
                     currentRow++;
                 }
+            }
+
+            void municipalLabel(Graphics g)
+            {
+                Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
+                Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
+                Point ptCompanyNameCd = new Point(labelCenter, labelLocation.Y + 10);
+                Point ptUnitName = new Point(labelCenter, labelLocation.Y + 14);
+                Point ptCloseDate = new Point(labelCenter, labelLocation.Y + 22);
+
+                g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
+                g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
+                g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
+                g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
+            }
+
+            void infectiousLabel(Graphics g)
+            {
+                Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
+                Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
+                Point ptCompanyNameCd = new Point(labelCenter, labelLocation.Y + 9);
+                Point ptUnitName = new Point(labelCenter, labelLocation.Y + 11);
+                Point ptRegon = new Point(labelCenter, labelLocation.Y + 15);
+                Point ptRegistrationBook = new Point(labelCenter, labelLocation.Y + 17);
+                Point ptRegistrationAuthority = new Point(labelCenter, labelLocation.Y + 19);
+                Point ptOpenDate = new Point(labelLocation.X + 13, labelLocation.Y + 22);
+                Point ptCloseDate = new Point(labelLocation.X + labelWidth - 13, labelLocation.Y + 22);
+
+                g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
+                g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
+                g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
+                g.DrawString("REGON " + Company.REGON, fontSmall, brush, ptRegon, stringFormat);
+                g.DrawString("Nr Ks. Rej. " + Company.RegistrationBookNumber, fontSmall, brush, ptRegistrationBook, stringFormat);
+                g.DrawString("Oragan rejestrowy " + Company.RegistrationAuthority, fontSmall, brush, ptRegistrationAuthority, stringFormat);
+                g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
+                g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
             }
         }
     }

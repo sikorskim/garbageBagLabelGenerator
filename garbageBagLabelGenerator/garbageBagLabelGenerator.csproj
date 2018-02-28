@@ -97,6 +97,7 @@
       <DependentUpon>FrmPrintPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="GarbageBagLabel.cs" />
+    <Compile Include="Label.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
