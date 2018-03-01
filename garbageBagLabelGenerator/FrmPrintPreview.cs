@@ -18,6 +18,12 @@ namespace garbageBagLabelGenerator
             InitializeComponent();
             this.garbageBagLabel = garbageBagLabel;
             this.code = code;
+            startup();
+        }
+
+        void startup()
+        {
+            this.WindowState = FormWindowState.Maximized;
             printDocument1.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169);
             printPreviewControl1.Document = printDocument1;
         }

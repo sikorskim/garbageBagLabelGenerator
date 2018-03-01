@@ -23,7 +23,8 @@ namespace garbageBagLabelGenerator
 
         void startup()
         {
-            this.Text += " wersja 1.01";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Text += " wersja 1.20 beta";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             radioButton1.Checked = true;
@@ -41,7 +42,7 @@ namespace garbageBagLabelGenerator
             }
             else
             {
-                string message = "Brak pliku "+settingsPath+"!\nSkontaktuj się z administratorem.";
+                string message = "Brak lub uszkodzony plik "+settingsPath+"!\nSkontaktuj się z administratorem.";
                 MessageBox.Show(message);
                 button1.Enabled = false;
             }
@@ -49,17 +50,17 @@ namespace garbageBagLabelGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string unit = listBox1.SelectedItem.ToString();
             if (radioButton1.Checked)
             {
-                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("komunalne/pozostałe", settings.Company, listBox1.SelectedItem.ToString());
+                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("komunalne/pozostałe", settings.Company, unit, settings.Labels.Single(p=>p.Id==0));
                 FrmPrintPreview frmPrintPreview = new FrmPrintPreview(garbageBagLabel, 0);
                 frmPrintPreview.ShowDialog();
             }
             else if (radioButton2.Checked)
             {
-                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("18-01-03*", settings.Company, listBox1.SelectedItem.ToString());
-                FrmPrintPreview frmPrintPreview = new FrmPrintPreview(garbageBagLabel, 1);
-                frmPrintPreview.ShowDialog();
+                FrmLabelChoose frmLabelChoose = new FrmLabelChoose(settings,unit);
+                frmLabelChoose.ShowDialog();
             }
         }
 
