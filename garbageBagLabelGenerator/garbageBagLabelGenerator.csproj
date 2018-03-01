@@ -84,22 +84,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Company.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Classes\Unit.cs" />
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmLabelChoose.cs">
+    <Compile Include="Forms\FrmLabelChoose.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmLabelChoose.Designer.cs">
+    <Compile Include="Forms\FrmLabelChoose.Designer.cs">
       <DependentUpon>FrmLabelChoose.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPrintPreview.cs">
+    <Compile Include="Forms\FrmPrintPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPrintPreview.Designer.cs">
+    <Compile Include="Forms\FrmPrintPreview.Designer.cs">
       <DependentUpon>FrmPrintPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GarbageBagLabel.cs" />
@@ -107,13 +108,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmLabelChoose.resx">
+    <EmbeddedResource Include="Forms\FrmLabelChoose.resx">
       <DependentUpon>FrmLabelChoose.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPrintPreview.resx">
+    <EmbeddedResource Include="Forms\FrmPrintPreview.resx">
       <DependentUpon>FrmPrintPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

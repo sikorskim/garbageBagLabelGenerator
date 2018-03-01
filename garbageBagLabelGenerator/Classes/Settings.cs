@@ -10,14 +10,14 @@ namespace garbageBagLabelGenerator
     public class Settings
     {
         public Company Company { get; set; }
-        public List<string> Units { get; set; }
+        public List<Unit> Units { get; set; }
         public List<Label> Labels { get; set; }
         public string Path { get; set; }
 
         public Settings(string path)
         {
             Path = path;
-            Units = new List<string>();
+            Units = new List<Unit>();
             Labels = new List<Label>();
         }
 
@@ -31,16 +31,18 @@ namespace garbageBagLabelGenerator
                 XElement elemLabels = doc.Element("Settings").Element("Labels");
                 Company = Company.get(elemCompany);
 
-                foreach (XElement unit in elemUnits.Elements("Unit"))
+                foreach (XElement xUnit in elemUnits.Elements("Unit"))
                 {
-                    Units.Add(unit.Value);
+                    Unit unit = new Unit();
+                    unit = unit.get(xUnit);
+                    Units.Add(unit);
                 }
 
-                foreach (XElement label in elemLabels.Elements("Label"))
+                foreach (XElement xLabel in elemLabels.Elements("Label"))
                 {
-                    Label tmpLabel = new Label();
-                    tmpLabel=tmpLabel.get(label);
-                    Labels.Add(tmpLabel);
+                    Label label = new Label();
+                    label=label.get(xLabel);
+                    Labels.Add(label);
                 }
         }
             catch (Exception)

@@ -18,10 +18,8 @@ namespace garbageBagLabelGenerator
         public int MarginTop { get; private set; }
         public Size Size { get; private set; }
         public Size PageSize { get; private set; }
-        public Font fontDefault { get; private set; }
-        public Font fontDefaultBold { get; private set; }
-        public Font fontSmall { get; private set; }
-        public Font fontSmallBold { get; private set; }
+        public int FontDefaultSize { get; private set; }
+        public int FontSmallSize { get; private set; }
 
         public Label()
         { }      
@@ -41,7 +39,10 @@ namespace garbageBagLabelGenerator
 
             int pageWidth = Int32.Parse(label.Attribute("PageWidth").Value);
             int pageHeight = Int32.Parse(label.Attribute("PageHeight").Value);
-            Size = new Size(width, height);
+            PageSize = new Size(width, height);
+
+            FontDefaultSize= Int32.Parse(label.Attribute("FontDefaultSize").Value);
+            FontSmallSize = Int32.Parse(label.Attribute("FontSmallSize").Value);
 
             return this;
         }

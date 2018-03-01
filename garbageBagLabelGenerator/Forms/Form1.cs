@@ -24,7 +24,7 @@ namespace garbageBagLabelGenerator
         void startup()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text += " wersja 1.20 beta";
+            this.Text += " wersja 1.21 beta";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             radioButton1.Checked = true;
@@ -38,7 +38,11 @@ namespace garbageBagLabelGenerator
             settings = new Settings(settingsPath);
             if (settings.importFromXML())
             {
-                listBox1.DataSource = settings.Units;
+                dataGridView1.DataSource = settings.Units;
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.ReadOnly = true;
+                dataGridView1.ColumnHeadersVisible = false;
             }
             else
             {
@@ -48,20 +52,25 @@ namespace garbageBagLabelGenerator
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void generate()
         {
-            string unit = listBox1.SelectedItem.ToString();
+            string unit = dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString();
             if (radioButton1.Checked)
             {
-                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("komunalne/pozostałe", settings.Company, unit, settings.Labels.Single(p=>p.Id==0));
+                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("komunalne/pozostałe", settings.Company, unit, settings.Labels.Single(p => p.Id == 0));
                 FrmPrintPreview frmPrintPreview = new FrmPrintPreview(garbageBagLabel, 0);
                 frmPrintPreview.ShowDialog();
             }
             else if (radioButton2.Checked)
             {
-                FrmLabelChoose frmLabelChoose = new FrmLabelChoose(settings,unit);
+                FrmLabelChoose frmLabelChoose = new FrmLabelChoose(settings, unit);
                 frmLabelChoose.ShowDialog();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            generate();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -71,14 +80,19 @@ namespace garbageBagLabelGenerator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            listBox1.DataSource = search(textBox1.Text);
+            dataGridView1.DataSource = search(textBox1.Text);
         }
 
-        List<string> search(string query)
+        List<Unit> search(string query)
         {
             query = query.ToLower();
-            List<string> searchResult = settings.Units.Where(p => p.ToLower().Contains(query)).ToList();
+            List<Unit> searchResult = settings.Units.Where(p => p.Name.ToLower().Contains(query)).ToList();
             return searchResult;
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            generate();
         }
     }
 }

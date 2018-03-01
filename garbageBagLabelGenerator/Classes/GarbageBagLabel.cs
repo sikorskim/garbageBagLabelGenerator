@@ -37,23 +37,9 @@ namespace garbageBagLabelGenerator
 
             //font settings
 
-            int fontSizeDefault=0;
-            int fontSizeSmall=0;
-
-            if (Label.Id == 0)
-            {
-                fontSizeDefault = 8;
-                fontSizeSmall = 6;
-            }
-            else if (Label.Id == 1)
-            {
-                fontSizeDefault =12;
-                fontSizeSmall = 10;
-            }
-
-            Font fontDefault = new Font("Times New Roman", fontSizeDefault);
-            Font fontSmall = new Font("Times New Roman", fontSizeSmall);
-            Font fontBold = new Font("Times New Roman", fontSizeDefault, FontStyle.Bold);
+            Font fontDefault = new Font("Times New Roman", Label.FontDefaultSize);
+            Font fontSmall = new Font("Times New Roman", Label.FontSmallSize);
+            Font fontBold = new Font("Times New Roman", Label.FontDefaultSize, FontStyle.Bold);
             Brush brush = Brushes.Black;
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
@@ -88,7 +74,7 @@ namespace garbageBagLabelGenerator
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
-                else if (code == 1)
+                else if (code == 1 && Label.Id==0)
                 {
                     Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
                     Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
@@ -110,6 +96,29 @@ namespace garbageBagLabelGenerator
                     g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
+                else if (code == 1 && Label.Id == 1)
+                {
+                    Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 5);
+                    Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 10);
+                    Point ptCompanyNameCd = new Point(labelCenter, labelLocation.Y + 15);
+                    Point ptUnitName = new Point(labelCenter, labelLocation.Y + 20);
+                    Point ptRegon = new Point(labelCenter, labelLocation.Y + 25);
+                    Point ptRegistrationBook = new Point(labelCenter, labelLocation.Y + 30);
+                    Point ptRegistrationAuthority = new Point(labelCenter, labelLocation.Y + 35);
+                    Point ptOpenDate = new Point(labelLocation.X + 13, labelLocation.Y + 45);
+                    Point ptCloseDate = new Point(labelLocation.X + Label.Size.Width - 13, labelLocation.Y + 45);
+
+                    g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
+                    g.DrawString(Company.NameLine0, fontSmall, brush, ptCompanyName, stringFormat);
+                    g.DrawString(Company.NameLine1, fontSmall, brush, ptCompanyNameCd, stringFormat);
+                    g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
+                    g.DrawString("REGON " + Company.REGON, fontSmall, brush, ptRegon, stringFormat);
+                    g.DrawString("Nr Ks. Rej. " + Company.RegistrationBookNumber, fontSmall, brush, ptRegistrationBook, stringFormat);
+                    g.DrawString("Oragan rejestrowy " + Company.RegistrationAuthority, fontSmall, brush, ptRegistrationAuthority, stringFormat);
+                    g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
+                    g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
+                }
+
 
                 g.DrawRectangle(labelBorder, label);
                 currentColumn++;

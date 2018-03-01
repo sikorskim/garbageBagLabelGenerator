@@ -15,6 +15,7 @@ namespace garbageBagLabelGenerator
         public string RegistrationAuthority { get; set; }
         public virtual string NameLine0 { get { return getNameLine0(); } }
         public virtual string NameLine1 { get { return getNameLine1(); } }
+        public List<Unit> Units { get; set; }
 
         public Company(string name, string regon, string registrationBookNumber, string registrationAuthority)
         {
@@ -37,12 +38,14 @@ namespace garbageBagLabelGenerator
 
         string getNameLine0()
         {
-            string line0 = "";
             if (Name.Length > 30)
             {
-                line0 = Name.Substring(0, 22);
+                return Name.Substring(0, 22);
             }
-                return line0;
+            else
+            {
+                return Name;
+            }
         }
 
         string getNameLine1()
