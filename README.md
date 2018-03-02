@@ -1,4 +1,4 @@
-# GarbageBagLabelGenerator Beta
+# GarbageBagLabelGenerator
 	
 **version 1.20**
 - label size choose window added
