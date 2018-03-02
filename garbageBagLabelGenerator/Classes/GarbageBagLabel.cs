@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace garbageBagLabelGenerator
 {
-   public class GarbageBagLabel
+    public class GarbageBagLabel
     {
         public string GarbageType { get; set; }
         public Company Company { get; set; }
@@ -32,7 +32,7 @@ namespace garbageBagLabelGenerator
         {
             g.PageUnit = GraphicsUnit.Millimeter;
             float lineSize = 0.2f;
-            Pen p = new Pen(Color.Black, lineSize);
+            Pen p = new Pen(Color.White, lineSize);
             Pen labelBorder = new Pen(Color.White, 0);
 
             //font settings
@@ -53,10 +53,13 @@ namespace garbageBagLabelGenerator
             //draw label
             int currentColumn = 0;
             int currentRow = 0;
-
+            
             while (currentRow < Label.Rows)
             {
-                Point labelLocation = new Point(Label.Size.Width * currentColumn, Label.Size.Height * currentRow);
+                Point labelLocation = new Point();
+                //labelLocation = new Point(Label.Size.Width * currentColumn, Label.Size.Height * currentRow);
+                labelLocation.X = Label.Size.Width * currentColumn + Label.MarginLeft-5;
+                labelLocation.Y = Label.Size.Height * currentRow + Label.MarginTop;
                 Rectangle label = new Rectangle(labelLocation, Label.Size);
                 int labelCenter = labelLocation.X + Label.Size.Width / 2;
 
@@ -74,7 +77,7 @@ namespace garbageBagLabelGenerator
                     g.DrawString(UnitName, fontBold, brush, ptUnitName, stringFormat);
                     g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
-                else if (code == 1 && Label.Id==0)
+                else if (code == 1 && Label.Id == 0)
                 {
                     Point ptGarbageType = new Point(labelCenter, labelLocation.Y + 3);
                     Point ptCompanyName = new Point(labelCenter, labelLocation.Y + 7);
@@ -105,7 +108,7 @@ namespace garbageBagLabelGenerator
                     Point ptRegon = new Point(labelCenter, labelLocation.Y + 25);
                     Point ptRegistrationBook = new Point(labelCenter, labelLocation.Y + 30);
                     Point ptRegistrationAuthority = new Point(labelCenter, labelLocation.Y + 35);
-                    Point ptOpenDate = new Point(labelLocation.X + 13, labelLocation.Y + 45);
+                    Point ptOpenDate = new Point(labelLocation.X + 15, labelLocation.Y + 45);
                     Point ptCloseDate = new Point(labelLocation.X + Label.Size.Width - 13, labelLocation.Y + 45);
 
                     g.DrawString(GarbageType, fontBold, brush, ptGarbageType, stringFormat);
@@ -115,14 +118,13 @@ namespace garbageBagLabelGenerator
                     g.DrawString("REGON " + Company.REGON, fontSmall, brush, ptRegon, stringFormat);
                     g.DrawString("Nr Ks. Rej. " + Company.RegistrationBookNumber, fontSmall, brush, ptRegistrationBook, stringFormat);
                     g.DrawString("Oragan rejestrowy " + Company.RegistrationAuthority, fontSmall, brush, ptRegistrationAuthority, stringFormat);
-                    g.DrawString("Data otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
-                    g.DrawString("Data zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
+                    g.DrawString("Data i godzina\n otwarcia", fontSmall, brush, ptOpenDate, stringFormat);
+                    g.DrawString("Data i godzina\n zamknięcia", fontSmall, brush, ptCloseDate, stringFormat);
                 }
-
 
                 g.DrawRectangle(labelBorder, label);
                 currentColumn++;
-                if (currentColumn % 4 == 0)
+                if (currentColumn % Label.Columns == 0)
                 {
                     currentColumn = 0;
                     currentRow++;

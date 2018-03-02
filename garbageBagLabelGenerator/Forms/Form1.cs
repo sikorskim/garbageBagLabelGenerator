@@ -24,7 +24,7 @@ namespace garbageBagLabelGenerator
         void startup()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text += " wersja 1.21";
+            this.Text += " wersja 1.22";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             radioButton1.Checked = true;

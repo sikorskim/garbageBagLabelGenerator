@@ -30,7 +30,7 @@ namespace garbageBagLabelGenerator
             Name = label.Attribute("Name").Value;
             Columns = Int32.Parse(label.Attribute("Columns").Value);
             Rows = Int32.Parse(label.Attribute("Rows").Value);
-            MarginLeft= Columns = Int32.Parse(label.Attribute("MarginLeft").Value);
+            MarginLeft= Int32.Parse(label.Attribute("MarginLeft").Value);
             MarginTop = Int32.Parse(label.Attribute("MarginTop").Value);
 
             int width= Int32.Parse(label.Attribute("Width").Value);
@@ -41,8 +41,8 @@ namespace garbageBagLabelGenerator
             int pageHeight = Int32.Parse(label.Attribute("PageHeight").Value);
             PageSize = new Size(width, height);
 
-            FontDefaultSize= Int32.Parse(label.Attribute("FontDefaultSize").Value);
-            FontSmallSize = Int32.Parse(label.Attribute("FontSmallSize").Value);
+            FontDefaultSize= Int32.Parse(label.Attribute("FontSizeDefault").Value);
+            FontSmallSize = Int32.Parse(label.Attribute("FontSizeSmall").Value);
 
             return this;
         }
