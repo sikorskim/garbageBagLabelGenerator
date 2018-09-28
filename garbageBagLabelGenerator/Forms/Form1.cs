@@ -24,7 +24,7 @@ namespace garbageBagLabelGenerator
         void startup()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text += " wersja 1.22";
+            this.Text += " wersja 1.32";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             radioButton1.Checked = true;
@@ -63,8 +63,15 @@ namespace garbageBagLabelGenerator
             }
             else if (radioButton2.Checked)
             {
-                FrmLabelChoose frmLabelChoose = new FrmLabelChoose(settings, unit);
-                frmLabelChoose.ShowDialog();
+                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("18-01-03*", settings.Company, unit, settings.Labels.Single(p => p.Id == 1));
+                FrmPrintPreview frmPrintPreview = new FrmPrintPreview(garbageBagLabel, 1);
+                frmPrintPreview.ShowDialog();
+            }
+            else if (radioButton3.Checked)
+            {
+                GarbageBagLabel garbageBagLabel = new GarbageBagLabel("18-01-02*", settings.Company, unit, settings.Labels.Single(p => p.Id == 1));
+                FrmPrintPreview frmPrintPreview = new FrmPrintPreview(garbageBagLabel, 1);
+                frmPrintPreview.ShowDialog();
             }
         }
 
