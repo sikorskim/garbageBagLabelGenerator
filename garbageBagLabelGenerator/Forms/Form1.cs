@@ -24,12 +24,12 @@ namespace garbageBagLabelGenerator
         void startup()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text += " wersja 1.32";
+            this.Text += " wersja 1.33";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             radioButton1.Checked = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            label2.Text = "Copyright © 2018 by Maciej Sikorski";
+            label2.Text = "Copyright © 2018-2019 by Maciej Sikorski";
             loadSettings();
         }
 

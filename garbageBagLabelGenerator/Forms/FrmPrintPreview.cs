@@ -43,7 +43,9 @@ namespace garbageBagLabelGenerator
 
             if (result == DialogResult.OK)
             {
-                printDocument1.Print();
+                printDocument1.PrinterSettings.Copies=printDialog1.PrinterSettings.Copies;
+                printDocument1.PrinterSettings.PrinterName=printDialog1.PrinterSettings.PrinterName;
+                printDocument1.Print();                
             }
         }
     }
