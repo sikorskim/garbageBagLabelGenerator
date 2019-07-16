@@ -41,7 +41,7 @@ namespace garbageBagLabelGenerator
                 foreach (XElement xLabel in elemLabels.Elements("Label"))
                 {
                     Label label = new Label();
-                    label=label.get(xLabel);
+                    //label=label.get(xLabel);
                     Labels.Add(label);
                 }
         }

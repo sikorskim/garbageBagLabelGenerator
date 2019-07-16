@@ -1,4 +1,5 @@
-﻿using System;
+﻿using garbageBagLabelGenerator.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,7 @@ namespace garbageBagLabelGenerator
             this.MinimizeBox = false;
             radioButton1.Checked = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            label2.Text = "Copyright © 2018 by Maciej Sikorski";
+            label2.Text = "Copyright © 2018-2019 by Maciej Sikorski";
             loadSettings();
         }
 
@@ -100,6 +101,17 @@ namespace garbageBagLabelGenerator
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             generate();
+        }
+
+        private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
+
+        private void konfiguratorEtykietToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmConfigurator frmConfigurator = new FrmConfigurator();
+            frmConfigurator.Show();
         }
     }
 }

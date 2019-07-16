@@ -85,12 +85,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Company.cs" />
+    <Compile Include="Classes\Content.cs" />
+    <Compile Include="Classes\Page.cs" />
+    <Compile Include="Classes\Template.cs" />
     <Compile Include="Classes\Unit.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmConfigurator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmConfigurator.Designer.cs">
+      <DependentUpon>FrmConfigurator.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmLabelChoose.cs">
       <SubType>Form</SubType>
@@ -111,6 +120,9 @@
     <Compile Include="Classes\Settings.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmConfigurator.resx">
+      <DependentUpon>FrmConfigurator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmLabelChoose.resx">
       <DependentUpon>FrmLabelChoose.cs</DependentUpon>
